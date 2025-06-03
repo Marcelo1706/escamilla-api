@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\TourPackage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
 
 class PackageController extends Controller
 {
@@ -53,5 +55,11 @@ class PackageController extends Controller
                 return $image->image_url; // Usamos el accessor del modelo PackageGallery
             })
         ]);
+    }
+
+    public function getHotelsFromAPI(Request $request)
+    {
+        $response = Http::get(env("API_URL")."/hotel-rating/hotels");
+        return $response->json();
     }
 }

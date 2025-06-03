@@ -11,3 +11,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('all_info', [PackageController::class, 'allInfo']);
 Route::get('package', [PackageController::class, 'packageDetail']);
+Route::get('hotels', [PackageController::class, 'getHotelsFromAPI']);
