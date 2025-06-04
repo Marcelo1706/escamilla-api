@@ -52,9 +52,11 @@ class PackageController extends Controller
 
     public function packageDetail(Request $request)
     {
-        $package = TourPackage::with(['galleryImages' => function($query) {
-            $query->select(['id', 'tour_package_id', 'image_path']);
-        }])->findOrFail($request->id);
+        $package = TourPackage::with([
+            'galleryImages' => function ($query) {
+                $query->select(['id', 'tour_package_id', 'image_path']);
+            }
+        ])->findOrFail($request->id);
 
         return response()->json([
             'id' => $package->id,
@@ -69,7 +71,7 @@ class PackageController extends Controller
             'assistance' => $package->assistance,
             'baggage' => $package->baggage,
             'tours' => $package->tours,
-            'images' => $package->galleryImages->map(function($image) {
+            'images' => $package->galleryImages->map(function ($image) {
                 return $image->image_url; // Usamos el accessor del modelo PackageGallery
             })
         ]);
@@ -77,7 +79,7 @@ class PackageController extends Controller
 
     public function getHotelsFromAPI(Request $request)
     {
-        $response = Http::get(env("API_URL")."/hotel-rating/hotels");
+        $response = Http::get(env("API_URL") . "/hotel-rating/hotels");
         return $response->json();
     }
 
@@ -91,6 +93,13 @@ class PackageController extends Controller
                 'name' => $item->name,
                 'price' => $item->price,
                 'banner' => $item->banner_url, // Usamos el accessor
+                'flights' => $item->flights,
+                'hotels' => $item->hotels,
+                'meals' => $item->meals,
+                'transportation' => $item->transportation,
+                'assistance' => $item->assistance,
+                'baggage' => $item->baggage,
+                'tours' => $item->tours,
             ]);
 
         return response()->json([
