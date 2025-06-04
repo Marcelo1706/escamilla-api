@@ -21,7 +21,7 @@ class PackageController extends Controller
             ]);
 
         $packages = TourPackage::where('is_promotion', true)
-            ->get(['id', 'name', 'price', 'banner_image'])
+            ->get()
             ->map(fn($item) => [
                 'id' => $item->id,
                 'name' => $item->name,
