@@ -26,7 +26,14 @@ class PackageController extends Controller
                 'id' => $item->id,
                 'name' => $item->name,
                 'price' => $item->price,
-                'banner' => $item->banner_url // Usamos el accessor
+                'banner' => $item->banner_url, // Usamos el accessor
+                'flights' => $item->flights,
+                'hotels' => $item->hotels,
+                'meals' => $item->meals,
+                'transportation' => $item->transportation,
+                'assistance' => $item->assistance,
+                'baggage' => $item->baggage,
+                'tours' => $item->tours,
             ]);
 
         $regions = PackageRegions::all(['id', 'name', 'banner_image'])
@@ -55,6 +62,13 @@ class PackageController extends Controller
             'price' => $package->price,
             'description' => $package->description,
             'banner' => $package->banner_url, // Usamos el accessor
+            'flights' => $package->flights,
+            'hotels' => $package->hotels,
+            'meals' => $package->meals,
+            'transportation' => $package->transportation,
+            'assistance' => $package->assistance,
+            'baggage' => $package->baggage,
+            'tours' => $package->tours,
             'images' => $package->galleryImages->map(function($image) {
                 return $image->image_url; // Usamos el accessor del modelo PackageGallery
             })
@@ -65,5 +79,39 @@ class PackageController extends Controller
     {
         $response = Http::get(env("API_URL")."/hotel-rating/hotels");
         return $response->json();
+    }
+
+    public function regionPackages(Request $request)
+    {
+        $region = PackageRegions::findOrFail($request->id);
+        $packages = $region->tourPackages()
+            ->get(['id', 'name', 'price', 'banner_image'])
+            ->map(fn($item) => [
+                'id' => $item->id,
+                'name' => $item->name,
+                'price' => $item->price,
+                'banner' => $item->banner_url, // Usamos el accessor
+            ]);
+
+        return response()->json([
+            'region' => [
+                'id' => $region->id,
+                'name' => $region->name,
+                'banner' => $region->banner_url
+            ],
+            'packages' => $packages
+        ]);
+    }
+
+    public function getRegions()
+    {
+        $regions = PackageRegions::all(['id', 'name', 'banner_image'])
+            ->map(fn($region) => [
+                'id' => $region->id,
+                'name' => $region->name,
+                'banner' => $region->banner_url
+            ]);
+
+        return response()->json($regions);
     }
 }
