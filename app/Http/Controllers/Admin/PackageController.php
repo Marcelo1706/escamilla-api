@@ -62,25 +62,32 @@ class PackageController extends Controller
 
     public function update(Request $request, TourPackage $package)
     {
-        $validated = $this->validatePackage($request, true);
+        try {
+            $validated = $this->validatePackage($request, true);
 
-        // Actualizar banner si se proporciona uno nuevo
-        if ($request->hasFile('banner_image')) {
-            // Eliminar banner anterior
-            Storage::disk('public')->delete($package->banner_image);
-            
-            $bannerPath = $request->file('banner_image')->store('packages/banners', 'public');
-            $validated['banner_image'] = $bannerPath;
+            // Actualizar banner si se proporciona uno nuevo
+            if ($request->hasFile('banner_image')) {
+                // Eliminar banner anterior
+                Storage::disk('public')->delete($package->banner_image);
+                
+                $bannerPath = $request->file('banner_image')->store('packages/banners', 'public');
+                $validated['banner_image'] = $bannerPath;
+            }
+
+            // Actualizar paquete
+            $package->update($validated);
+
+            // Agregar nuevas imágenes de galería
+            $this->storeGalleryImages($request, $package);
+
+            return redirect()->route('admin.packages.index')
+                ->with('success', 'Paquete actualizado exitosamente');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            dd($e);
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput();
         }
-
-        // Actualizar paquete
-        $package->update($validated);
-
-        // Agregar nuevas imágenes de galería
-        $this->storeGalleryImages($request, $package);
-
-        return redirect()->route('admin.packages.index')
-            ->with('success', 'Paquete actualizado exitosamente');
     }
 
     public function destroy(TourPackage $package)
@@ -116,6 +123,14 @@ class PackageController extends Controller
             'description' => 'required|string',
             'gallery_images.*' => 'image',
             'region_id' => 'required|exists:package_regions,id',
+            'is_promotion' => 'required|boolean',
+            'flights' => 'required|boolean',
+            'hotels' => 'required|boolean',
+            'meals' => 'required|boolean',
+            'transportation' => 'required|boolean',
+            'assistance' => 'required|boolean',
+            'baggage' => 'required|boolean',
+            'tours' => 'required|boolean',
         ];
 
         if (!$isUpdate) {

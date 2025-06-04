@@ -15,8 +15,10 @@
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">Nombre</th>
+                        <th class="py-3 px-6 text-left">Beneficios</th>
                         <th class="py-3 px-6 text-center">Precio</th>
                         <th class="py-3 px-6 text-center">Región</th>
+                        <th class="py-3 px-6 text-center">Promoción</th>
                         <th class="py-3 px-6 text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -24,8 +26,40 @@
                     @foreach ($packages as $package)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-6 text-left">{{ $package->name }}</td>
+                            <td class="py-3 px-6 text-left">
+                                <ul>
+                                    @if ($package->flights)
+                                        <li>Vuelos</li>
+                                    @endif
+                                    @if ($package->hotels)
+                                        <li>Hoteles</li>
+                                    @endif
+                                    @if ($package->meals)
+                                        <li>Alimentación</li>
+                                    @endif
+                                    @if ($package->transportation)
+                                        <li>Transporte</li>
+                                    @endif
+                                    @if ($package->assistance)
+                                        <li>Asistencia</li>
+                                    @endif
+                                    @if ($package->baggage)
+                                        <li>Equipaje</li>
+                                    @endif
+                                    @if ($package->tours)
+                                        <li>Tours</li>
+                                    @endif
+                                </ul>
+                            </td>
                             <td class="py-3 px-6 text-center">${{ number_format($package->price, 2) }}</td>
                             <td class="py-3 px-6 text-center">{{ $regions->find($package->region_id)->name ?? 'Sin región' }}</td>
+                            <td class="py-3 px-6 text-center">
+                                @if ($package->is_promotion)
+                                    <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Sí</span>
+                                @else
+                                    <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">No</span>
+                                @endif
+                            </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
                                     <a href="{{ route('admin.packages.edit', $package) }}"

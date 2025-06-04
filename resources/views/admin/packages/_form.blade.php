@@ -116,4 +116,100 @@
     @enderror
 </div>
 
+<div class="mb-4">
+    <label class="inline-flex items-center">
+        <input type="hidden" name="is_promotion" value="0">
+        <input type="checkbox" name="is_promotion" value="1" class="form-checkbox h-5 w-5 text-blue-600"
+            {{ old('is_promotion', $package->is_promotion ?? false) ? 'checked' : '' }}>
+        <span class="ml-2 text-gray-700">¿Es promoción?</span>
+    </label>
+    @error('is_promotion')
+        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
+    <label class="inline-flex items-center">
+        <input type="hidden" name="flights" value="0">
+        <input type="checkbox" name="flights" value="1" class="form-checkbox h-5 w-5 text-blue-600"
+            {{ old('flights', $package->flights ?? false) ? 'checked' : '' }}>
+        <span class="ml-2 text-gray-700">¿Incluye vuelos?</span>
+    </label>
+    @error('flights')
+        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
+    <label class="inline-flex items-center">
+        <input type="hidden" name="hotels" value="0">
+        <input type="checkbox" name="hotels" value="1" class="form-checkbox h-5 w-5 text-blue-600"
+            {{ old('hotels', $package->hotels ?? false) ? 'checked' : '' }}>
+        <span class="ml-2 text-gray-700">¿Incluye hoteles?</span>
+    </label>
+    @error('hotels')
+        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
+    <label class="inline-flex items-center">
+        <input type="hidden" name="meals" value="0">
+        <input type="checkbox" name="meals" value="1" class="form-checkbox h-5 w-5 text-blue-600"
+            {{ old('meals', $package->meals ?? false) ? 'checked' : '' }}>
+        <span class="ml-2 text-gray-700">¿Incluye Alimentación?</span>
+    </label>
+    @error('meals')
+        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
+    <label class="inline-flex items-center">
+        <input type="hidden" name="transportation" value="0">
+        <input type="checkbox" name="transportation" value="1" class="form-checkbox h-5 w-5 text-blue-600"
+            {{ old('transportation', $package->transportation ?? false) ? 'checked' : '' }}>
+        <span class="ml-2 text-gray-700">¿Incluye Transporte?</span>
+    </label>
+    @error('transportation')
+        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
+    <label class="inline-flex items-center">
+        <input type="hidden" name="assistance" value="0">
+        <input type="checkbox" name="assistance" value="1" class="form-checkbox h-5 w-5 text-blue-600"
+            {{ old('assistance', $package->assistance ?? false) ? 'checked' : '' }}>
+        <span class="ml-2 text-gray-700">¿Incluye Asistencia?</span>
+    </label>
+    @error('assistance')
+        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
+    <label class="inline-flex items-center">
+        <input type="hidden" name="baggage" value="0">
+        <input type="checkbox" name="baggage" value="1" class="form-checkbox h-5 w-5 text-blue-600"
+            {{ old('baggage', $package->baggage ?? false) ? 'checked' : '' }}>
+        <span class="ml-2 text-gray-700">¿Incluye Equipaje?</span>
+    </label>
+    @error('baggage')
+        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="mb-4">
+    <label class="inline-flex items-center">
+        <input type="hidden" name="tours" value="0">
+        <input type="checkbox" name="tours" value="1" class="form-checkbox h-5 w-5 text-blue-600"
+            {{ old('tours', $package->tours ?? false) ? 'checked' : '' }}>
+        <span class="ml-2 text-gray-700">¿Incluye Tours?</span>
+    </label>
+    @error('tours')
+        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
+</div>
+
 @vite(['resources/js/form.js'])

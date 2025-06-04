@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\PackageRegions;
 use App\Models\TourPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -24,18 +25,24 @@ class PackageController extends Controller
 
         $packages = TourPackage::where('is_promotion', false)
             ->get(['id', 'name', 'price', 'banner_image'])
-            ->map(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'name' => $item->name,
-                    'price' => $item->price,
-                    'banner' => $item->banner_url // Usamos el accessor
-                ];
-            });
+            ->map(fn($item) => [
+                'id' => $item->id,
+                'name' => $item->name,
+                'price' => $item->price,
+                'banner' => $item->banner_url // Usamos el accessor
+            ]);
+
+        $regions = PackageRegions::all(['id', 'name', 'banner_image'])
+            ->map(fn($region) => [
+                'id' => $region->id,
+                'name' => $region->name,
+                'banner' => $region->bannerUrl
+            ]);
 
         return response()->json([
             'promos' => $promos,
-            'packages' => $packages
+            'packages' => $packages,
+            'regions' => $regions
         ]);
     }
 

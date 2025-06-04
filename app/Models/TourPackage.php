@@ -16,6 +16,24 @@ class TourPackage extends Model
         'description',
         'banner_image',
         'region_id',
+        'is_promotion',
+        'flights',
+        'hotels',
+        'meals',
+        'transportation',
+        'assistance',
+        'baggage',
+        'tours',
+    ];
+    protected $casts = [
+        'is_promotion' => 'boolean',
+        'flights' => 'boolean',
+        'hotels' => 'boolean',
+        'meals' => 'boolean',
+        'transportation' => 'boolean',
+        'assistance' => 'boolean',
+        'baggage' => 'boolean',
+        'tours' => 'boolean',
     ];
 
     public function galleryImages()
