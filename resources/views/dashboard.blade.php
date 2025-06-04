@@ -10,23 +10,47 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{-- Add a card with an icon to the route admin.packages.index with the text "administrar paquetes" --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <a href="{{ route('admin.packages.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            <i class="fas fa-box"></i> Administrar paquetes
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                        {{-- Tarjeta: Administrar regiones --}}
+                        <a href="{{ route('admin.regions.index') }}" class="block bg-green-100 hover:bg-green-200 transition p-6 rounded-xl shadow-md text-center">
+                            <div class="text-green-600 text-4xl mb-4">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div class="text-lg font-semibold text-gray-800 mb-2">
+                                Administrar regiones
+                            </div>
+                            <p class="text-sm text-gray-700">
+                                Configurar las regiones que agruparán paquetes. Aparecen en el sitio web como <strong>"Paquetes en el mundo"</strong>.
+                            </p>
                         </a>
-                    </div>
-                    {{-- Add a card with an icon to the route admin.regions.index with the text "administrar regiones" --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                        <a href="{{ route('admin.regions.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                            <i class="fas fa-globe"></i> Administrar regiones
+
+                        {{-- Tarjeta: Administrar paquetes --}}
+                        <a href="{{ route('admin.packages.index') }}" class="block bg-blue-100 hover:bg-blue-200 transition p-6 rounded-xl shadow-md text-center">
+                            <div class="text-blue-600 text-4xl mb-4">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <div class="text-lg font-semibold text-gray-800 mb-2">
+                                Administrar paquetes
+                            </div>
+                            <p class="text-sm text-gray-700">
+                                Cada uno de los paquetes promocionales que aparecerán en el sitio.
+                            </p>
                         </a>
-                    </div>
-                    {{-- Add a card with an icon to the route admin.promos.index with the text "administrar promociones" --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                        <a href="{{ route('admin.promos.index') }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-                            <i class="fas fa-tags"></i> Administrar promociones
+
+                        {{-- Tarjeta: Banners de promoción --}}
+                        <a href="{{ route('admin.promos.index') }}" class="block bg-yellow-100 hover:bg-yellow-200 transition p-6 rounded-xl shadow-md text-center">
+                            <div class="text-yellow-600 text-4xl mb-4">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="text-lg font-semibold text-gray-800 mb-2">
+                                Banners de promoción
+                            </div>
+                            <p class="text-sm text-gray-700">
+                                Imágenes que aparecen en la parte superior de la página, justo abajo del buscador.
+                            </p>
                         </a>
+
                     </div>
                 </div>
             </div>
