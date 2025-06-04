@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\TourPackage;
+use App\Models\PackageRegions;
 use App\Models\PackageGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,12 +14,14 @@ class PackageController extends Controller
     public function index()
     {
         $packages = TourPackage::all();
-        return view('admin.packages.index', compact('packages'));
+        $regions = PackageRegions::all();
+        return view('admin.packages.index', compact('packages', 'regions'));
     }
 
     public function create()
     {
-        return view('admin.packages.create', ['package' => new TourPackage()]);
+        $regions = PackageRegions::all();
+        return view('admin.packages.create', ['package' => new TourPackage(), 'regions' => $regions]);
     }
 
     public function store(Request $request)
@@ -53,7 +56,8 @@ class PackageController extends Controller
 
     public function edit(TourPackage $package)
     {
-        return view('admin.packages.edit', compact('package'));
+        $regions = PackageRegions::all();
+        return view('admin.packages.edit', compact('package', 'regions'));
     }
 
     public function update(Request $request, TourPackage $package)
@@ -111,7 +115,7 @@ class PackageController extends Controller
             'price' => 'required|numeric|min:0',
             'description' => 'required|string',
             'gallery_images.*' => 'image',
-            'is_promotion' => 'required|boolean'
+            'region_id' => 'required|exists:package_regions,id',
         ];
 
         if (!$isUpdate) {

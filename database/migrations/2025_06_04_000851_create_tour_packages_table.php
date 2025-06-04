@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->decimal('price', 10, 2);
             $table->text('description');
             $table->string('banner_image');
-            $table->boolean('is_promotion')->default(false);
+            $table->foreignId('region_id')->constrained('package_regions')->onDelete('cascade');
             $table->timestamps();
         });
     }

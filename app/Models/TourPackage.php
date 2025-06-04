@@ -15,7 +15,7 @@ class TourPackage extends Model
         'price',
         'description',
         'banner_image',
-        'is_promotion'
+        'region_id',
     ];
 
     public function galleryImages()
@@ -29,5 +29,11 @@ class TourPackage extends Model
         return Attribute::make(
             get: fn () => $this->banner_image ? asset('storage/' . $this->banner_image) : null,
         );
+    }
+
+    // Relación con la región del paquete
+    public function region()
+    {
+        return $this->belongsTo(PackageRegions::class, 'region_id');
     }
 }

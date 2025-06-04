@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\PromoController;
+use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PackageController;
@@ -18,9 +20,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::prefix('admin')->name("admin.")->group(function () {
         Route::resource('packages', PackageController::class);
+        Route::resource('regions', RegionController::class);
+        Route::resource('promos', PromoController::class);
         // Ruta adicional para eliminar imágenes de galería
         Route::delete('gallery-images/{galleryImage}', [PackageController::class, 'destroyGalleryImage'])->name('gallery-images.destroy');
     });
+
 });
 
 require __DIR__.'/auth.php';

@@ -3,10 +3,10 @@
 @section('content')
     <div class="container mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold">Paquetes Turísticos</h1>
-            <a href="{{ route('admin.packages.create') }}"
+            <h1 class="text-2xl font-bold">Promociones</h1>
+            <a href="{{ route('admin.promos.create') }}"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Nuevo Paquete
+                Nueva Promoción
             </a>
         </div>
 
@@ -15,20 +15,16 @@
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">Nombre</th>
-                        <th class="py-3 px-6 text-center">Precio</th>
-                        <th class="py-3 px-6 text-center">Región</th>
                         <th class="py-3 px-6 text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm">
-                    @foreach ($packages as $package)
+                    @foreach ($promos as $promo)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">{{ $package->name }}</td>
-                            <td class="py-3 px-6 text-center">${{ number_format($package->price, 2) }}</td>
-                            <td class="py-3 px-6 text-center">{{ $regions->find($package->region_id)->name ?? 'Sin región' }}</td>
+                            <td class="py-3 px-6 text-left">{{ $promo->name }}</td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
-                                    <a href="{{ route('admin.packages.edit', $package) }}"
+                                    <a href="{{ route('admin.promos.edit', $promo) }}"
                                         class="mr-2 text-blue-500 hover:text-blue-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                             fill="currentColor">
@@ -36,8 +32,8 @@
                                                 d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                         </svg>
                                     </a>
-                                    <form action="{{ route('admin.packages.destroy', $package) }}" method="POST"
-                                        onsubmit="return confirm('¿Estás seguro de eliminar este paquete?')">
+                                    <form action="{{ route('admin.promos.destroy', $promo) }}" method="POST"
+                                        onsubmit="return confirm('¿Estás seguro de eliminar esta promoción?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700">

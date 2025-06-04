@@ -16,6 +16,18 @@
                             <i class="fas fa-box"></i> Administrar paquetes
                         </a>
                     </div>
+                    {{-- Add a card with an icon to the route admin.regions.index with the text "administrar regiones" --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                        <a href="{{ route('admin.regions.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                            <i class="fas fa-globe"></i> Administrar regiones
+                        </a>
+                    </div>
+                    {{-- Add a card with an icon to the route admin.promos.index with the text "administrar promociones" --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                        <a href="{{ route('admin.promos.index') }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                            <i class="fas fa-tags"></i> Administrar promociones
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
